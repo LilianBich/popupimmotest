@@ -1,1 +1,47 @@
-
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="form">
+        <div class="form-title">
+          Page Fetcher
+           ex : 172839779540918
+        </div>
+        <div class="form-id-input">
+            <input type="text" name="id">
+        </div>
+        <button class="form-submit-btn btn btn-primary">add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('.form-submit-btn').on('click', function() {
+    console.log('clic')
+    var id = $('input').val()
+    console.log(id)
+    url = 'https://graph.facebook.com/' + id + '/posts'
+    console.log(url)
+    $.ajax({
+      async: true,
+      type: "GET",
+      url: url,
+      data: {
+        "access_token": 'CAACEdEose0cBADB2Ud1l76ZCsk0ZCaezvsgkel3Sps2OeNjsAURapnQYjdKPW3bSfBQNx8YUl5k8gS2fPlHtEZBc4k4CjLDyZBbLGTpYeNNGD0ZAUP5W3wz9z3ZClXM0ZCvJPJ45te3NmJxOsSOzUbdRaemgMSt9xtRaTk2mDvZCTM4hCSkJoQBoKHpodh7feZCZBBbAixz0wyExuAZAfDHl8rSdQxOvGF45qZAalqgnF8zRfgZDZD'
+      },
+      success: function(data) {
+        console.log(data)
+        $.ajax({
+          async: true,
+          type: "POST",
+          url: '<%= pages_path %>',
+          data: {
+            data
+          },
+          success: function(reponse) {
+            console.log(reponse)
+          }
+        });
+      }
+    });
+  })
+</script>
