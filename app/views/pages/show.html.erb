@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <% @page.posts.each do |post| %>
+        <p>
+          <p class='title'><%= @page.name %> - <%= time_ago_in_words(post.created_time) %> ago</p>
+          <p class="content">
+            <%= post.message %>
+          </p>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

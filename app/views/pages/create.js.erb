@@ -1,0 +1,5 @@
+<% if @page %>
+  $('.pages-index').append('<div class="page-link"><%= link_to @page.name, page_path(@page) %></div>')
+<% else %>
+  $('.error-message').text('This page has already been loaded')
+<% end %>

@@ -11,6 +11,16 @@
         </div>
         <button class="form-submit-btn btn btn-primary">add</button>
       </div>
+      <div class="error-message">
+
+      </div>
+      <div class="pages-index">
+        <% @pages.each do |page| %>
+          <div class="page-link">
+            <%= link_to page.name, page_path(page) %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -26,21 +36,26 @@
       type: "GET",
       url: url,
       data: {
-        "access_token": 'CAACEdEose0cBADB2Ud1l76ZCsk0ZCaezvsgkel3Sps2OeNjsAURapnQYjdKPW3bSfBQNx8YUl5k8gS2fPlHtEZBc4k4CjLDyZBbLGTpYeNNGD0ZAUP5W3wz9z3ZClXM0ZCvJPJ45te3NmJxOsSOzUbdRaemgMSt9xtRaTk2mDvZCTM4hCSkJoQBoKHpodh7feZCZBBbAixz0wyExuAZAfDHl8rSdQxOvGF45qZAalqgnF8zRfgZDZD'
+        "access_token": 'CAACEdEose0cBAHo0hVcSRztpukPsPI9dszUocSbmcNVgaeQLyq15qbs49Ur1rqvljMQzkYTxiQ25eGZCMm8GDZCOWTHk9lP8JYMua2gm8UE9DqsRO9PTlFaIVSZCjYZBx4ChrLCZAoMYNTUlD9p4RlZAwsVPsK45bAX41bVdnP15Ds0a753XQdtNmLQZAHIS1heCbwFJVW7WiqZCZA4gDeHro1K94ZCuGaFNN2WSfhqlpi1QZDZD'
       },
       success: function(data) {
-        console.log(data)
+        console.log(data['error'])
+        if (data)
         $.ajax({
           async: true,
           type: "POST",
           url: '<%= pages_path %>',
           data: {
+            fb_id: id,
             data
           },
           success: function(reponse) {
             console.log(reponse)
           }
         });
+      },
+      error: function(result) {
+        $('.error-message').text('Can not load this page')
       }
     });
   })
